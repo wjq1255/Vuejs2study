@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input x-webkit-speech lang="zh-CN" />
+	<script>
+		var getTimeByZone = function(offset){
+			utc = new Date().getTime() + new Date().getTimezoneOffset()*60000; //utc即GMT时间 
+			nd = new Date(utc + (3600000*offset)); 
+			// return nd.toLocaleString();
+			return nd.getTime();
+		}
+		document.writeln("<p>Hawaii time is " + getTimeByZone(-10)+"</p>"); 
+		document.writeln("<p>beijing time is " + getTimeByZone(8)+"</p>"); 
+	</script>
+	
+</body>
+</html>

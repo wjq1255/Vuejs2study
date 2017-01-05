@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue.js-2.0 v-if v-for</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="demo1">
+		<p v-if="tag">易则知</p>
+		<p v-if="!tag">www.yizezhi.com</p>
+		<h1 v-if="tag">Yes</h1>
+		<h1 v-else>No</h1>
+		<div v-if="type === 'A'">
+		  A
+		</div>
+		<div v-else-if="type === 'B'">
+		  B
+		</div>
+		<div v-else-if="type === 'C'">
+		  C
+		</div>
+		<div v-else>
+		  Not A/B/C
+		</div>
+		<h1 v-show="tag">Hello!</h1>
+	</div>
+
+	<!-- div#vfor>ul[v-for='item in items']>li{{{item.name}}=={{item.age}}} -->
+	<div id="vfor">
+		<ul>
+			<li v-for="(item, index) in items" :key="item.id">
+				{{msg}}---{{index}} === {{item.name}}=={{item.age | fage | sage(2)}}
+			</li>
+			<li v-for="n in evenNumbers">{{ n }}</li>
+			<li v-for="n in numbers">{{ n }}</li>
+		</ul>
+	</div>
+
+	<script>
+		var v = new Vue({
+			el:"#demo1",
+			data:{
+				tag:true,
+				type:"B2"
+			}
+		});
+
+		var vfor = new Vue({
+			el:"#vfor",
+			data:{
+				msg:"易则知：",
+				items:[{name:"lilei",age:23},
+					{name:"haole",age:33},
+					{name:"lilly",age:25},
+					{name:"wulei",age:22}
+				],
+				numbers: [ 1, 2, 3, 4, 5 ]
+			},
+			filters:{//过滤器
+				fage:function(val){
+					return val%2?val+1:val;
+				},
+				sage:function(val,add){
+					return val + add;
+				}
+			},
+			computed: {
+			  	evenNumbers: function () {
+				    return this.numbers.filter(function (number) {
+				      	return number % 2 === 0
+				    })
+			  	},
+			  	even: function (numbers) {
+				    return numbers.filter(function (number) {
+				      	return number % 2 === 0
+				    })
+				}
+			}
+		});
+
+	</script>
+</body>
+</html>
