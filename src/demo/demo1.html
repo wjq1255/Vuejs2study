@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue.js-2.0 hello world</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+	<!-- div#hello>p{{{ message }}}+input[v-model='message'] -->
+	<div id="hello">
+	  <p>{{ message }}</p>
+	  <input type="text" v-model="message">
+	</div>
+
+	<!-- div#bind>p[v-bind:title='msg'  v-show='tag']{对P标签添加title属性}+button[v-on:click='tag=!tag']{{{ tag?"隐藏":"显示" }}}+ button[v-on:click='reverse']{反转} -->
+	<div id="bind">
+		<p v-bind:title="msg" v-show="tag">{{msg}}</p>
+		<button v-on:click="tag=!tag">{{ tag?"隐藏":"显示" }}</button>
+		<button v-on:click="reverse">反转</button>
+	</div>
+
+	<!-- div#vfor>ul[v-for='item in items']>li{{{item.name}}=={{item.age}}} -->
+	<div id="vfor">
+		<ul v-for="item in items">
+			<li>{{item.name}}=={{item.age | fage | sage(2)}}</li>
+		</ul>
+	</div>
+
+
+	<script>
+		var hello =	new Vue({
+			el:"#hello",
+			data:{
+				message:"hello world !",
+			}
+		});
+
+		var bind = new Vue({
+			el:"#bind",
+			data:{
+				tag:true,
+				msg:"对P标签添加title属性 !"
+			},
+			methods: {
+				reverse:function(){
+					this.msg = this.msg.split('').reverse().join('');
+					vfor.items.push({name:"lulu",age:25});
+				}
+			}
+		});
+
+		var vfor = new Vue({
+			el:"#vfor",
+			data:{
+				items:[{name:"lilei",age:23},
+					{name:"haole",age:33},
+					{name:"lilly",age:25},
+					{name:"wulei",age:22}
+				]
+			},
+			filters:{//过滤器
+				fage:function(val){
+					return val%2?val+1:val;
+				},
+				sage:function(val,add){
+					return val + add;
+				}
+			}
+		});
+
+	</script>
+	
+</body>
+</html>

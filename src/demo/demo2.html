@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue.js-2.0 list</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+	<!-- div#app{{{ message }}} -->
+	<div id="hello">
+	  {{ message }}
+	  <div v-once>this is a v-once demo {{message}}</div>
+	  <div>{{rawHtml}}</div>
+	  <div v-html='rawHtml' v-bind:id='bid'></div>
+	</div>
+
+
+	<script>
+	var hello =	new Vue({
+			el:"#hello",
+			data:{
+				message:"hello world !",
+				rawHtml:"<h3>sss</h3>",
+				bid:212
+			}
+		});
+	// 2s后 message数值改变  而v-once 并没有改变
+	setTimeout(function(){hello.message="1111"},2000);
+	</script>
+	
+</body>
+</html>
